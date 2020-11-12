@@ -1,7 +1,7 @@
-# Scraper
+#Scraper
 This is a web scraper designed to scrape reviews about vehicle insurance providers in Australia
 
-# Loading libraries
+#Loading libraries
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
@@ -9,12 +9,12 @@ import requests
 from time import sleep
 from random import randint
 
-# Create objects for url to scrape from multiple pages
+#Create objects for url to scrape from multiple pages
 pages = np.arange(1,10, 1)
 print(pages)
 providers = ['youi-car-insurance','budget-direct-car-insurance'] #Based on popularity. More reviews, more data.
 
-# Scraper Design
+#Scraper Design
 data=[]
 for value in providers:#Looping through listings by providers (Outer)
  for page in pages:#Looping through pages within listings (Inner)
@@ -31,7 +31,7 @@ for value in providers:#Looping through listings by providers (Outer)
 len(total_reviews)
 len(data)
 
-# Forming dataframe outline for extracted features
+#Forming dataframe outline for extracted features
 reviews = []
 
 for reviewBox in data:
@@ -51,7 +51,7 @@ for reviewBox in data:
     # append the process review and the title to the reviews list
     reviews.append([review_title, review_text, review_date, review_stars])
 
-# Exporting scrape results
+#Exporting scrape results
 output_column_names = ['title', 'review', 'date', 'stars']
 df1 = pd.DataFrame(reviews, columns=output_column_names)
 df1.to_csv('Reviews_Scrape.csv', index=None)
